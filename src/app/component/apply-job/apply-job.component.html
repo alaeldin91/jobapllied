@@ -1,6 +1,6 @@
 <body class="app">
     <div class="container mt-5">
-  
+
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Alaeldin Job</a>
@@ -12,7 +12,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a class="nav-link active" aria-current="page" [routerLink]="['/applyjob']">applyJob</a>
-                 <a class="nav-link">Logout</a>
+                        <a class="nav-link">Logout</a>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,8 @@
                                 <h5 class="card-title">{{job.name}}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">{{job.numberJob}}</h6>
                                 <p class="card-text">{{job.description}}</p>
-                                <button class="btn btn-primary"  data-toggle="modal" data-target="#exampleModal">Apply</button>
+                                <button class="btn btn-primary" data-toggle="modal"
+                                    data-target="#exampleModal">Apply</button>
                             </div>
                         </div>
                     </td>
@@ -38,56 +39,78 @@
         </div>
 
     </div>
+    <!-- Update Modal-->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="color:#15b9eb">Add Job</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:#15b9eb">Apply Job </h5>
                     <a class="text-red" data-dismiss="modal" aria-label="Close">x</a>
                 </div>
                 <div class="modal-body">
-                    <div classs="row">
-                        <div class="col-sm-4">
+                    <div class="row">
+                        <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="jobName">Name<span class="text-red">*</span></label>
+                                <label for="name">name<span class="text-red"></span>*</label>
                                 <input type="text" class="form-control" style="background-color:whitesmoke;" id="name"
-                                    name="name"  placeholder="please enter Job name" required>
-                               
-                            </div>
-                         </div>
-                         <div class="col-sm-4">
-                            <div class="form-group">
-                              <label for="mobileNumber"> mobile Number
-                                    <span class="text-red">*</span></label>
-                                <input type="text" class="form-control" style="background-color: aliceblue;"
-                                    id="mobileNumber" name="mobileNumber" formControlName="mobileNumber"
-                                    placeholder="Mobile Number" required>
-                                
-                            </div>
-                          </div>
-                          <div class="col-sm-4">
-                               <div class="form-group">
-                                
-                                <label for="cvName"> cv Name <span>*</span> </label>
-                                
-                                <input type="cvName" class="form-control" style="background-color: aliceblue;"
-                                
-                                id="cvName" name=""  placeholder="cName" required>
-                                </div>
+                                    name="name" formControlName="name" placeholder="Name" required>
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="mobileNumber">MobileNumber<span class="text-red"></span></label>
+                                <input type="text" class="form-control" style="background-color:whitesmoke;" id="name2"
+                                    name="name2" formControlName="mobileNumber" placeholder="Mobile Number" required>
+                            </div>
 
-                    
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="cvText"> cvText<span class="text-red"></span></label>
+                                <input type="cvText" class="form-control" style="background-color:whitesmoke;"
+                                    id="cvText" name="cvText" placeholder="cvText" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="cvText"> UploadCv<span class="text-red"></span></label>
+                            <div class="form-group">
+                                <input type="file" /> 
+                                <button class="btn btn-success">Upload</button>
+                            </div>
+                        </div>
+                        <h3>experience </h3>
+                        <div class="col-sm-6">
+                            <label for="job">Select Job<span class="text-red"></span></label>
+                            <div class="form-group">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="job">Select Job<span class="text-red"></span></label>
+                            <div class="form-group">
+                                <input type="cvText" class="form-control" style="background-color:whitesmoke;"
+                                    id="company" name="company" placeholder="please Enter company" required>
+                            </div>
+                         </div>
+                         
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class=" btn btn-success" data-dismiss="modal"
                         style="background-color: #f58478;">Close</button>
                     <button type="button" class="btn btn-primary" style="background-color: #15b9eb;"
-                        data-dismiss="modal">Save
+                        data-dismiss="modal">Update
                         changes</button>
                 </div>
             </div>
+
         </div>
+
     </div>
+
 
 </body>
