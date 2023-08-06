@@ -1,0 +1,206 @@
+<body class="app">
+    <div class="container mt-5">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Alaeldin Job</a>
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link active" aria-current="page" [routerLink]="['/adminjob']">Job</a>
+                        <a class="nav-link" [routerLink]="['/userdashboard']">Users</a>
+
+                        <a class="nav-link"(click)="logout()">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="col-md-10" style="text-align: right;margin-right:20px; width:200;">
+            <button class="btn btn-success" style="margin-top: 50px; margin-left:100px;background-color: #15b9eb;"
+                data-toggle="modal" data-target="#exampleModal">
+                add Job (+)
+            </button>
+        </div>
+        <div class="card m-5 p-3">
+            <div class="card-body">
+                <table datatable [dtOptions]="dtoptions" [dtTrigger]="dtTrigger" class="table table-bordered">
+                    <thead class="bg-dark text-white">
+                        <tr>
+                            <th>Name</th>
+                            <th>NumberJob</th>
+                            <th>Description</th>
+                            <th>Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let job of jobData">
+                            <td>
+                                {{job.name}}
+                            </td>
+                            <td>
+                                {{job.numberJob}}
+                            </td>
+                            <td>
+                                {{job.description}}
+                            </td>
+                            <td>
+                                <a data-toggle="modal" class="btn btn-primary col-md-12"
+                                    (click)="onEditJob(job.id)"
+                                    style="background-color: #15b9eb; color: white;"
+                                     data-target="#updateModal">Edit</a>
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Add New Job -->
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:#15b9eb">Add Job</h5>
+                    <a class="text-red" data-dismiss="modal" aria-label="Close">x</a>
+                </div>
+                <div class="modal-body">
+                    <div classs="row" [formGroup]="jobFormGroup">
+                        <div class="col-sm-12">
+                            <div class="form-group" formGroupName="jobForm">
+                                <label for="jobName">Name Job<span class="text-red">*</span></label>
+                                <input type="text" class="form-control" style="background-color:whitesmoke;" id="name"
+                                    name="name" formControlName="name" placeholder="please enter Job name" required>
+                                <div *ngIf="name.invalid&&(name.dirty ||  name.touched)" class="alert
+                                    alert-danger mt-1">
+                                    <div *ngIf="name.errors.required ||
+                                         name.errors.notOnlyWhitespace">
+                                        job Name is required
+                                    </div>
+                                    <div *ngIf="name.errors.minlength">
+                                        Product must be at least 2 characters
+                                        long
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" formGroupName="jobForm">
+                              <label for="productdescription"> Description Product
+                                    <span class="text-red">*</span></label>
+                                <input type="text" class="form-control" style="background-color: aliceblue;"
+                                    id="description" name="description" formControlName="description"
+                                    placeholder="Description Job" required>
+                                <div *ngIf="description.invalid && (description.dirty || description.touched)"
+                                    class="alert-danger mt-1">
+                                    <div *ngIf="description.errors.required || description.errors.notOnlyWhitespace">
+                                        Description  is required
+                                    </div>
+                                    <div *ngIf="description.errors.minlength">
+                                         Description must be at least 2 characters
+                                        long
+                                    </div>
+                                </div>
+                            </div>
+
+                               <div class="form-group" formGroupName="jobForm">
+                                
+                                <label for="jobFormNumber"> Number Job <span>*</span> </label>
+                                
+                                <input type="number" class="form-control" style="background-color: aliceblue;"
+                                
+                                id="numberJob" name="" formControlName="numberJob" placeholder="numberJob" required>
+                                
+                                  
+                                  
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class=" btn btn-success" data-dismiss="modal"
+                        style="background-color: #f58478;">Close</button>
+                    <button type="button" class="btn btn-primary" style="background-color: #15b9eb;"
+                        data-dismiss="modal" (click)="createJob()">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:#15b9eb">Update Product</h5>
+                    <a class="text-red" data-dismiss="modal" aria-label="Close">x</a>
+                </div>
+                <div class="modal-body">
+                    <div classs="row" [formGroup]="jobFormGroup">
+                     <div class="col-sm-12">
+                            <div class="form-group" formGroupName="jobForm">
+                                <label for="nameJob">Job Name<span class="text-red">*</span></label>
+                                  <input type="text" class="form-control" style="background-color:whitesmoke;" id="name"
+                                    name="name" formControlName="name" [ngModel]="nameSave" placeholder="Name Product" required>
+                                <div *ngIf="name.invalid&&(name.dirty ||  name.touched)" class="alert
+                                    alert-danger mt-1">
+                                   
+                                    <div *ngIf="name.errors.required ||
+                                         name.errors.notOnlyWhitespace">
+                                        Job Name is required
+                                    </div>
+                                    
+                                    <div *ngIf="name.errors.minlength">
+                                        Product must be at least 2 characters
+                                        long
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" formGroupName="jobForm">
+                                    <label for="JobDescription"> Description Job
+                                        <span class="text-red">*</span></label>
+                                    <input type="text" class="form-control" style="background-color: aliceblue;"
+                                        id="description" name="description" formControlName="description"
+                                        placeholder="Description Product" [ngModel]="descriptionSave" required>
+                                    <div *ngIf="description.invalid && (description.dirty || description.touched)"
+                                        class="alert-danger mt-1">
+                                        <div *ngIf="description.errors.required || description.errors.notOnlyWhitespace">
+                                            Description Product is required
+                                        </div>
+                                        <div *ngIf="description.rrors.minlength">
+                                            Product Description must be at least 2 characters
+                                            long
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group" formGroupName="jobForm">
+                                    <label for="numberJob"> Number Job  <span>*</span> </label>
+                                    <input type="number" class="form-control" style="background-color: aliceblue;"
+                                        id="numberjob" name="numberJob"formControlName="numberJob" [ngModel] ="numberJobSave" placeholder="price Product"
+                                        required>
+                                  
+                                </div>
+                              
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class=" btn btn-success" data-dismiss="modal"
+                        style="background-color: #f58478;">Close</button>
+                    <button type="button" class="btn btn-primary" style="background-color: #15b9eb;"
+                        data-dismiss="modal" (click)="onUpdate()">Update
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>

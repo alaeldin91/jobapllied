@@ -1,0 +1,94 @@
+<body class="app">
+    <div class="container mt-5">
+  
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Alaeldin Job</a>
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link active" aria-current="page" [routerLink]="['/applyjob']">applyJob</a>
+                 <a class="nav-link">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="col-md-10">
+
+            <table datatable [dtOptions]="dtoptions" [dtTrigger]="dtTrigger" class="table table-bordered"
+                style="width: 50rem;">
+                <tr *ngFor="let job of jobData">
+                    <td>
+                        <div class="card" style="width: 50rem;">
+                            <div class="card-body">
+                                <h5 class="card-title">{{job.name}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{job.numberJob}}</h6>
+                                <p class="card-text">{{job.description}}</p>
+                                <button class="btn btn-primary"  data-toggle="modal" data-target="#exampleModal">Apply</button>
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="color:#15b9eb">Add Job</h5>
+                    <a class="text-red" data-dismiss="modal" aria-label="Close">x</a>
+                </div>
+                <div class="modal-body">
+                    <div classs="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="jobName">Name Job<span class="text-red">*</span></label>
+                                <input type="text" class="form-control" style="background-color:whitesmoke;" id="name"
+                                    name="name"  placeholder="please enter Job name" required>
+                               
+                            </div>
+
+                            <div class="form-group">
+                              <label for="productdescription"> Description Product
+                                    <span class="text-red">*</span></label>
+                                <input type="text" class="form-control" style="background-color: aliceblue;"
+                                    id="description" name="description" formControlName="description"
+                                    placeholder="Description Job" required>
+                                
+                            </div>
+
+                               <div class="form-group">
+                                
+                                <label for="jobFormNumber"> Number Job <span>*</span> </label>
+                                
+                                <input type="number" class="form-control" style="background-color: aliceblue;"
+                                
+                                id="numberJob" name=""  placeholder="numberJob" required>
+                                
+                                  
+                                  
+                                
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class=" btn btn-success" data-dismiss="modal"
+                        style="background-color: #f58478;">Close</button>
+                    <button type="button" class="btn btn-primary" style="background-color: #15b9eb;"
+                        data-dismiss="modal">Save
+                        changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
