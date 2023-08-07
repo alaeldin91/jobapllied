@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
+import { Industry } from 'src/app/common/industry';
 import { Jobs } from 'src/app/common/jobs';
 import { ValidateNotWay } from 'src/app/common/validate-not-way';
+import { IndustryService } from 'src/app/service/industry.service';
 import { JobServiceService } from 'src/app/service/job-service.service';
 import { ServiceTokenService } from 'src/app/service/service-token.service';
 
@@ -13,13 +15,16 @@ import { ServiceTokenService } from 'src/app/service/service-token.service';
 })
 export class ApplyJobComponent implements OnInit {
   jobData:Jobs[] = [];
+  industryData:any;
   dtoptions: DataTables.Settings = {};
   dtTrigger:Subject<any> = new Subject<any>();
   jobApplyFormGroup:any;
 
 
 
-  constructor(private jobService:JobServiceService,private serviceToken:ServiceTokenService
+  constructor(private jobService:JobServiceService
+    ,private serviceToken:ServiceTokenService,
+    private  serviceIndustry:IndustryService
     ,private formBuilder:FormBuilder){
 
   }
@@ -73,7 +78,10 @@ export class ApplyJobComponent implements OnInit {
       }
   
       };
-    this.handleListJob();  
+    
+      this.handleListJob();  
+    
+     this.getListIndustry();
   }
   
   get name(){
@@ -170,4 +178,18 @@ export class ApplyJobComponent implements OnInit {
   }
   }
 
+  getListIndustry(){
+   const token:string|null = this.serviceToken.getToken();
+
+   if(token !==null){
+   
+    this.serviceIndustry.getIndustryService(token).subscribe(response=>{
+   
+      this.industryData = response ;
+      
+      console.log(this.industryData);
+    })
+   
+  }
+  }
 }

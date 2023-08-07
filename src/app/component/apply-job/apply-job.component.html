@@ -119,8 +119,11 @@
                             <label for="job">Select Job<span class="text-red"></span></label>
                             <div class="form-group" formGroupName="jobApplyForm">
                                 <select class="form-select" aria-label="Default select example" formControlName="jobTitleId">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
+                                    <option selected>Select Job</option>
+                                    <option *ngFor="let job of jobData" [value]="job.id">
+                                        {{job.name}}
+
+                                    </option>
 
                                 </select>
                                 <div *ngIf="jobTitleId.invalid && (jobTitleId.dirty || jobTitleId.touched)"
@@ -170,7 +173,7 @@
 
                                     <option selected>plese select Industry</option>
 
-                                    <option value="1">One</option>
+                                    <option *ngFor="let industry of industryData " [value]="industry.id">{{industry.name}}</option>
 
                                 </select>
 
