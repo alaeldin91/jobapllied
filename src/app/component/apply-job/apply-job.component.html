@@ -48,103 +48,211 @@
                     <a class="text-red" data-dismiss="modal" aria-label="Close">x</a>
                 </div>
                 <div class="modal-body">
-                    <div class="row">
+                    <div class="row" [formGroup]="jobApplyFormGroup">
                         <div class="col-sm-6">
-                            <div class="form-group">
+                            <div class="form-group" formGroupName="jobApplyForm">
                                 <label for="name">name<span class="text-red"></span>*</label>
                                 <input type="text" class="form-control" style="background-color:whitesmoke;" id="name"
                                     name="name" formControlName="name" placeholder="Name" required>
+                                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert-danger mt-1">
+                                    <div *ngIf="name.errors.required || name.errors.notOnlyWhitespace">
+                                        Name is required
+                                    </div>
+                                    <div *ngIf="name.errors.minlength">
+                                        Name must be at least 2 characters
+                                        long
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="form-group">
+                            <div class="form-group" formGroupName="jobApplyForm">
                                 <label for="mobileNumber">MobileNumber<span class="text-red"></span></label>
-                                <input type="text" class="form-control" style="background-color:whitesmoke;" id="name2"
-                                    name="name2" formControlName="mobileNumber" placeholder="Mobile Number" required>
+                                <input type="text" class="form-control" style="background-color:whitesmoke;"
+                                    id="mobileNumber" name="mobileNumber" formControlName="mobileNumber"
+                                    placeholder="Mobile Number" required>
+                                <div *ngIf="mobileNumber.invalid && (mobileNumber.dirty || mobileNumber.touched)"
+                                    class="alert-danger mt-1">
+                                    <div *ngIf="mobileNumber.errors.required || mobileNumber.errors.notOnlyWhitespace">
+                                        Mobile Number is required
+                                    </div>
+                                    <div *ngIf="mobileNumber.errors.minlength">
+                                        Mobile Number must be at least 2 characters
+                                        long
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
                         <div class="col-sm-6">
-                            <div class="form-group">
+                            <div class="form-group" formGroupName="jobApplyForm">
                                 <label for="cvText"> cvText<span class="text-red"></span></label>
                                 <input type="cvText" class="form-control" style="background-color:whitesmoke;"
+                                    formControlName="cvText"
                                     id="cvText" name="cvText" placeholder="cvText" required>
+                                <div *ngIf="cvText.invalid && (cvText.dirty || cvText.touched)"
+                                    class="alert-danger mt-1">
+                                    <div *ngIf="cvText.errors.required || cvText.errors.notOnlyWhitespace">
+                                        Cv Text is required
+                                    </div>
+                                    <div *ngIf="cvText.errors.minlength">
+                                        Cv Text must be at least 2 characters
+                                        long
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="cvText"> UploadCv<span class="text-red"></span></label>
-                            <div class="form-group">
-                                <input type="file" />
+                            <div class="form-group" formGroupName="jobApplyForm">
+                                <input type="file" formControlName="cv" />
                                 <button class="btn btn-success">Upload</button>
+                                <div *ngIf="cv.invalid && (cv.dirty || cv.touched)" class="alert-danger mt-1">
+                                    <div *ngIf="cv.errors.required">
+                                        Cv is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <h3>experience </h3>
                         <div class="col-sm-6">
                             <label for="job">Select Job<span class="text-red"></span></label>
-                            <div class="form-group">
-                                <select class="form-select" aria-label="Default select example">
+                            <div class="form-group" formGroupName="jobApplyForm">
+                                <select class="form-select" aria-label="Default select example" formControlName="jobTitleId">
                                     <option selected>Open this select menu</option>
                                     <option value="1">One</option>
 
                                 </select>
+                                <div *ngIf="jobTitleId.invalid && (jobTitleId.dirty || jobTitleId.touched)"
+                                    class="alert-danger mt-1">
+                                    <div *ngIf="jobTitleId.errors.required">
+                                        Job is required
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="job">Company Name<span class="text-red"></span></label>
-                            <div class="form-group">
+                            <div class="form-group" formGroupName="jobApplyForm">
                                 <input type="company" class="form-control" style="background-color:whitesmoke;"
-                                    id="company" name="company" placeholder="please Enter company" required>
+                                    id="company" name="company" placeholder="please Enter company" required formControlName="company">
+                                <div *ngIf="cvText.invalid && (cvText.dirty || cvText.touched)"
+                                    class="alert-danger mt-1">
+                                    <div *ngIf="company.errors.required || company.errors.notOnlyWhitespace">
+                                        Company is required
+                                    </div>
+                                    <div *ngIf="company.errors.minlength">
+                                        Company must be at least 2 characters
+                                        long
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="job">Date Start<span class="text-red"></span></label>
-
-                            <input type="date" id="birthday" name="birthday" class="btn btn-success">
-
+                            <div class="form-group" formGroupName="jobApplyForm">
+                            <input type="date" id="birthday" name="birthday" class="btn btn-success" formControlName="dateStart">
+                            <div *ngIf="dateStart.invalid && (dateStart.dirty || dateStart.touched)">
+                                class="alert-danger mt-1">
+                                <div *ngIf="dateStart.errors.required">
+                                    Date Start is required
+                                </div>
+                            </div>
+                            </div>
                         </div>
                         <div class="col-sm-6">
 
-                            <label for="job">Industry<span class="text-red"></span></label>
+                            <label for="industry">Industry<span class="text-red"></span></label>
 
-                            <div class="form-group">
+                            <div class="form-group" formGroupName="jobApplyForm">
 
-                                <select class="form-select" aria-label="Default select example">
+                                <select class="form-select" aria-label="Default select example" formControlName="industry">
 
                                     <option selected>plese select Industry</option>
 
                                     <option value="1">One</option>
 
                                 </select>
+
+                                <div *ngIf="industry.invalid && (industry.dirty || cvText.touched)">
+                                    class="alert-danger mt-1">
+                                    <div *ngIf="industry.errors.required">
+                                        Industry is required
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                         <h3>Education </h3>
                         <div class="col-sm-6">
                             <label for="heighLevel">Heigh Level<span class="text-red"></span></label>
-                            <div class="form-group">
+                            <div class="form-group" formGroupName="jobApplyForm">
                                 <input type="heighlevel" class="form-control" style="background-color:whitesmoke;"
-                                    id="heighlevel" name="heighlevel" placeholder="please Enter Heigh Level" required>
+                                    id="heighlevel" name="heighlevel" placeholder="please Enter Heigh Level" required
+                                    formControlName="higestLevel">
+                                <div *ngIf="higestLevel.invalid && (higestLevel.dirty || higestLevel.touched)"
+                                    class="alert-danger mt-1">
+                                    <div *ngIf="higestLevel.errors.required || higestLevel.errors.notOnlyWhitespace">
+                                        Height Level is required
+                                    </div>
+                                    <div *ngIf="higestLevel.errors.minlength">
+                                        Height Level must be at least 2 characters
+                                        long
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
                         <div class="col-sm-6">
                             <label for="school">School<span class="text-red"></span></label>
-                            <div class="form-group">
+                            <div class="form-group" formGroupName="jobApplyForm">
                                 <input type="school" class="form-control" style="background-color:whitesmoke;"
-                                    id="school" name="school" placeholder="please Enter School" required>
+                                    id="school" name="school" placeholder="please Enter School" 
+                                    formControlName="school" required>
+                                <div *ngIf="school.invalid && (school.dirty || school.touched)"
+                                    class="alert-danger mt-1">
+                                    <div *ngIf="school.errors.required || school.errors.notOnlyWhitespace">
+                                        School is required
+                                    </div>
+                                    <div *ngIf="school.errors.minlength">
+                                        School must be at least 2 characters
+                                        long
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <label for="datecompleted">date completed<span class="text-red"></span></label>
-
-                            <input type="date" id="dateCompleted" name="dateCompleted" class="btn btn-success">
-
+                            <div class="form-group" formGroupName="jobApplyForm">
+                            <input type="date" id="dateCompleted" name="dateCompleted" class="btn btn-success"
+                            formControlName="dateComplated">
+                            <div *ngIf="dateComplated.invalid && (dateComplated.dirty || dateComplated.touched)"
+                                class="alert-danger mt-1">
+                                <div *ngIf="dateComplated.errors.required">
+                                    Date Complete is required
+                                </div>
+                                </div>
+                            </div>
                         </div>
                         <h3>Skills</h3>
                         <div class="col-sm-6">
                             <label for="skills">Skills Name<span class="text-red"></span></label>
-                            <div class="form-group">
+                            <div class="form-group" formGroupName="jobApplyForm">
                                 <input type="skills" class="form-control" style="background-color:whitesmoke;"
-                                    id="skills" name="skills" placeholder="please Enter skills" required>
+                                    id="skills" name="skills" placeholder="please Enter skills" 
+                                    formControlName="nameSkills"
+                                    required>
+                                <div *ngIf="nameSkills.invalid && (nameSkills.dirty || nameSkills.touched)"
+                                    class="alert-danger mt-1">
+                                    <div *ngIf="nameSkills.errors.required || nameSkills.errors.notOnlyWhitespace">
+                                        Name Skills is required
+                                    </div>
+                                    <div *ngIf="nameSkills.errors.minlength">
+                                        name Skills must be at least 2 characters
+                                        long
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

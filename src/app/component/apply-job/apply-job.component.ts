@@ -144,10 +144,12 @@ export class ApplyJobComponent implements OnInit {
 
   get nameSkills(){
 
-    return this.jobApplyFormGroup.get('jobApplyForm.completed');
+    return this.jobApplyFormGroup.get('jobApplyForm.nameSkills');
   
   }
   
+  
+
   handleListJob() {
   
     const token: string | null = this.serviceToken.getToken(); // Replace this with your actual source of string or null
